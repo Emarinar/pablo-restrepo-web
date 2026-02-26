@@ -1,0 +1,1928 @@
+:root{
+  /* Brand */
+  --red:#b80f1a;
+  --red-2:#d61a26;
+  --text:#1a1a1a;
+  --muted:#6b6b6b;
+
+  /* Layout */
+  --container: 1160px;
+  --radius:18px;
+  --radius-lg:22px;
+
+  /* Hero sizing (ajústalos si quieres más impacto) */
+  --hero-slogan-h: 510px;
+  --hero-photo-h: 820px;
+  --hero-photo-overlap: 50px; /* cuánto “se mete” sobre la siguiente sección */
+
+  /* Shadows */
+  --shadow-sm: 0 10px 24px rgba(0,0,0,.10);
+  --shadow:    0 20px 50px rgba(0,0,0,.14);
+  --shadow-lg: 0 34px 90px rgba(0,0,0,.20);
+}
+
+/* =========================
+   Base / Reset
+   ========================= */
+*{box-sizing:border-box}
+html,body{
+  margin:0;padding:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+  color:var(--text);
+  background:#fff;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{width:min(var(--container), calc(100% - 40px)); margin:0 auto}
+
+/* =========================
+   Header / Navigation
+   ========================= */
+.topbar{
+  position:sticky; top:0; z-index:50;
+  background:rgba(255,255,255,.94);
+  backdrop-filter: blur(12px);
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.topbar__inner{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; padding:14px 0;
+}
+
+.brand{display:flex; align-items:center; gap:12px; min-width:220px}
+.brand__logo{
+  width:74px; height:74px;
+  object-fit:contain;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.10));
+}
+.brand__text{line-height:1.05;font-weight:800}
+.brand__text strong{font-weight:950}
+
+/* Si usas badge liberal en header.php */
+.brand__badge{
+  margin-left:10px;
+  display:inline-flex; align-items:center; justify-content:center;
+  width:42px; height:42px;
+  border-radius:14px;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.10);
+  box-shadow: 0 10px 20px rgba(0,0,0,.08);
+}
+.brand__badge img{width:28px;height:28px;object-fit:contain}
+
+.nav{display:flex;gap:22px;align-items:center; justify-content:center; flex:1}
+.nav__link{font-weight:700;color:#222;opacity:.92}
+.nav__link:hover{color:var(--red)}
+.nav__link.is-active{color:var(--red)}
+
+.topbar__actions{display:flex;gap:10px;align-items:center}
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:10px 16px; border-radius:999px; border:1px solid transparent;
+  font-weight:900; letter-spacing:.2px;
+  transition:.2s ease;
+}
+.btn--primary{
+  background:linear-gradient(180deg,var(--red-2),var(--red));
+  color:#fff;
+  box-shadow:0 14px 26px rgba(184,15,26,.30);
+}
+.btn--primary:hover{transform:translateY(-1px); box-shadow:0 18px 34px rgba(184,15,26,.34)}
+.btn--lg{padding:12px 24px}
+
+.btn--ghost{
+  background:#fff;
+  border-color:rgba(0,0,0,.10);
+  box-shadow: 0 10px 20px rgba(0,0,0,.06);
+}
+.btn--ghost:hover{border-color:rgba(0,0,0,.18);transform:translateY(-1px)}
+
+.burger{display:none;background:none;border:none;cursor:pointer}
+.burger span{display:block;width:22px;height:2px;background:#222;margin:5px 0;border-radius:10px}
+
+/* =========================
+   Hero
+   ========================= */
+.hero{
+  position:relative;
+  overflow:hidden;
+}
+
+/* background */
+.hero__bg{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  transform: scale(1.02);
+  filter: blur(var(--hero-blur, 0px));
+  transition: filter .2s linear;
+}
+
+/* overlay (una sola definición) */
+.hero__overlay{
+  position:absolute;
+  inset:0;
+  background: linear-gradient(90deg,
+    rgba(120,0,0,.94) 0%,
+    rgba(184,15,26,.85) 44%,
+    rgba(184,15,26,.60) 100%);
+  -webkit-backdrop-filter: blur(calc(var(--hero-blur, 0px) * .5));
+  backdrop-filter: blur(calc(var(--hero-blur, 0px) * .5));
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(circle at 28% 48%, rgba(0,0,0,.26), transparent 62%);
+  z-index:1;
+}
+
+.hero__inner{
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns: 1.05fr .95fr;
+  align-items:center;
+  gap:28px;
+  min-height: 720px;
+}
+
+/* left */
+.hero__content{padding: 90px 0 90px}
+.hero__sloganImg{
+  display:inline-block;
+  filter: drop-shadow(0 26px 36px rgba(0,0,0,.38));
+  margin: 0 0 26px 0;
+}
+.hero__sloganImg img{
+  height: var(--hero-slogan-h);
+  width:auto;
+  border-radius:18px;
+}
+
+.hero__actions{display:flex; gap:12px; align-items:center}
+.hero__social{
+  display:flex; gap:10px; margin-top: 18px; flex-wrap:wrap;
+}
+.hero__social a{
+  width:42px;height:42px;border-radius:999px;
+  background:rgba(255,255,255,.94);
+  display:inline-flex;align-items:center;justify-content:center;
+  font-weight:950;color:var(--red);
+  box-shadow: 0 12px 22px rgba(0,0,0,.16);
+  transition:.2s ease;
+}
+.hero__social a:hover{transform:translateY(-2px)}
+
+/* right */
+.hero__photoWrap{
+  display:flex;
+  justify-content:flex-end;
+  align-items:flex-end;
+  padding-right: 6px;
+  overflow: visible;
+}
+.hero__photo{
+  height: var(--hero-photo-h);
+  width:auto;
+  max-width:none;
+  object-fit:contain;
+  transform: translateY(var(--hero-photo-overlap));
+  filter: drop-shadow(0 46px 60px rgba(0,0,0,.42));
+  position: relative;
+  z-index: 4;
+}
+
+/* =========================
+   Modules / Cards (Home)
+   ========================= */
+.modules{
+  position:relative;
+  z-index: 3;
+  background: linear-gradient(180deg, #ffffff 0%, #f6f6f6 100%);
+  padding: 26px 0 58px;
+  margin-top: calc(var(--hero-photo-overlap) * -1);
+}
+.modules::before{
+  content:"";
+  position:absolute;
+  top:-28px; left:0; right:0;
+  height:28px;
+  background: linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,1));
+}
+.modules__grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:18px;
+}
+
+.moduleCard{
+  background: rgba(255,255,255,.96);
+  border:1px solid rgba(0,0,0,.06);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  transition: .25s ease;
+  position:relative;
+  overflow:hidden;
+}
+.moduleCard:hover{
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+.moduleCard::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(circle at 20% 0%, rgba(214,26,38,.10), transparent 50%);
+  pointer-events:none;
+}
+.moduleCard__icon{
+  width:60px;height:60px;border-radius:999px;
+  background: linear-gradient(180deg, #e4232e, #b80f1a);
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;
+  box-shadow: 0 18px 30px rgba(184,15,26,.28);
+  margin-bottom:12px;
+}
+.moduleCard__title{margin:0 0 6px; font-size:18px; font-weight:950}
+.moduleCard__text{margin:0 0 14px; color:var(--muted); line-height:1.45}
+
+/* =========================
+   Internas
+   ========================= */
+.section{padding:34px 0}
+.pageHero{position:relative; overflow:hidden}
+.pageHero__bg{position:absolute; inset:0; background-size:cover; background-position:center}
+.pageHero__overlay{position:absolute; inset:0; background:rgba(184,15,26,.86)}
+.pageHero__inner{
+  position:relative;
+  padding:46px 0;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:18px;
+}
+.pageHero__title{
+  color:#fff;margin:8px 0 6px;
+  font-size:clamp(30px,3.6vw,46px);
+  font-weight:950;line-height:1.05;
+}
+.pageHero__lead{color:rgba(255,255,255,.92);max-width:760px;margin:0;line-height:1.35}
+
+.grid2{display:grid;grid-template-columns: 1.2fr .8fr;gap:18px}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+
+.card{
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(0,0,0,.06);
+  border-radius:var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+.card--pad{padding:18px}
+.h2{margin:0 0 10px;font-size:22px;font-weight:950}
+.h3{margin:0 0 8px;font-size:16px;font-weight:950}
+.muted{color:var(--muted)}
+.divider{height:1px;background:rgba(0,0,0,.08);margin:16px 0}
+
+/* =========================
+   Footer
+   ========================= */
+.footer{
+  background:#0f0f12;
+  color:#fff;
+  padding:34px 0 18px;
+  margin-top:40px;
+}
+.footer__grid{
+  display:grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap:22px;
+  align-items:start;
+}
+.footer__title{font-weight:950;font-size:18px}
+.footer__muted{opacity:.78;margin-top:6px}
+
+.footer__partyCard{
+  margin-top:14px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  background: rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.10);
+  padding:12px 14px;
+  border-radius:16px;
+}
+.footer__partyLogo{
+  width:56px;height:56px;
+  object-fit:contain;
+  border-radius:14px;
+  background:#fff;
+  padding:7px;
+}
+.footer__partyTitle{font-size:12px;opacity:.75;font-weight:950;letter-spacing:.12em;text-transform:uppercase}
+.footer__partyName{font-size:16px;font-weight:950}
+
+.social{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.social__icon{
+  width:40px;height:40px;border-radius:999px;
+  background: rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:950;
+  transition:.2s ease;
+}
+.social__icon:hover{transform:translateY(-2px);background:rgba(255,255,255,.12)}
+
+.footer__bottom{
+  margin-top:18px;
+  padding-top:14px;
+  border-top:1px solid rgba(255,255,255,.10);
+  opacity:.82;
+}
+
+/* =========================
+   WhatsApp flotante
+   ========================= */
+.wa-float{
+  position:fixed; right:18px; bottom:18px; z-index:999;
+  display:flex; align-items:center; gap:10px;
+  background:#1fbf5b; color:#fff;
+  padding:12px 14px; border-radius:999px;
+  box-shadow:0 14px 30px rgba(0,0,0,.22);
+  font-weight:950;
+}
+.wa-float:hover{transform:translateY(-2px)}
+.wa-float__icon{
+  width:36px;height:36px;border-radius:999px;
+  background:rgba(255,255,255,.18);
+  display:flex;align-items:center;justify-content:center;
+}
+.wa-float__text{display:none}
+@media (min-width: 720px){ .wa-float__text{display:inline} }
+
+/* =========================
+   Reveal (animación sutil)
+   ========================= */
+.reveal{
+  opacity:0;
+  transform: translateY(10px);
+  transition: opacity .7s ease, transform .7s ease;
+  will-change: opacity, transform;
+}
+.reveal.is-in{
+  opacity:1;
+  transform: translateY(0);
+}
+
+/* =========================
+   Responsive
+   ========================= */
+@media (max-width: 980px){
+  .nav{display:none}
+  .burger{display:inline-block}
+  .brand{min-width:auto}
+  .brand__logo{width:60px;height:60px}
+
+  .hero__inner{grid-template-columns:1fr; min-height:auto}
+  .hero__content{padding:70px 0 20px}
+  .hero__photoWrap{justify-content:center}
+  .hero__photo{
+    height: 520px;
+    transform: translateY(10px);
+  }
+  .modules{margin-top: -10px}
+  .modules__grid{grid-template-columns:1fr}
+
+  .grid2{grid-template-columns:1fr}
+  .cards3{grid-template-columns:1fr}
+  .pageHero__inner{flex-direction:column;align-items:flex-start}
+  .footer__grid{grid-template-columns:1fr}
+}
+
+/* ===== HERO: más bajito + CTA centrado + mini-stats ===== */
+.hero__inner{
+  min-height: 600px;        /* antes 660/720 */
+  padding: 58px 0 48px;     /* reduce alto visual */
+}
+
+/* slogan un poquito más grande sin romper */
+:root{ --hero-slogan-h: 580px; }
+
+/* Bloque bajo slogan: centrado en vertical */
+.hero__underSlogan{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;   /* queda alineado al slogan */
+  gap:12px;
+  margin-top:14px;
+}
+
+/* CTA y redes alineados y más centrados (visualmente) */
+.hero__underSlogan .btn{
+  align-self:flex-start;
+}
+
+.hero__social{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+/* MINI STATS */
+.hero__stats{
+  margin-top: 18px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.stat{
+  flex: 1 1 160px;
+  min-width: 160px;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.16);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 22px 60px rgba(0,0,0,.22);
+}
+
+.stat__num{
+  color:#fff;
+  font-weight: 950;
+  font-size: 22px;
+  line-height: 1.1;
+  letter-spacing: .2px;
+  text-shadow: 0 14px 30px rgba(0,0,0,.25);
+}
+
+.stat__label{
+  margin-top: 4px;
+  color: rgba(255,255,255,.88);
+  font-weight: 700;
+  font-size: 12.5px;
+  line-height: 1.25;
+}
+
+/* Ajuste para que se insinúen las cards */
+.modules{
+  margin-top: -22px;
+  padding-top: 18px;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  :root{ --hero-slogan-h: 160px; }
+  .hero__inner{ padding: 62px 0 14px; min-height:auto; }
+  .hero__stats{ gap:10px; }
+  .stat{ flex: 1 1 100%; }
+}
+
+/* =========================
+   HERO MÁS BAJITO (FIX FINAL)
+========================= */
+.hero__inner{
+  min-height: 12px !important;      /* era 600/660+ */
+  padding: 16px 0 6px !important;   /* recorta altura */
+}
+
+/* Slogan grande pero equilibrado */
+:root{ --hero-slogan-h: 310px; }
+.hero__sloganImg img{
+  height: var(--hero-slogan-h) !important;
+}
+
+/* Stats más compactos */
+.hero__stats{
+  margin-top: 14px !important;
+  gap: 10px !important;
+}
+.stat{
+  padding: 10px 12px !important;
+  border-radius: 16px !important;
+}
+.stat__num{ font-size: 20px !important; }
+.stat__label{ font-size: 12px !important; }
+
+/* FOTO: que no “infle” el hero */
+.hero__photo{
+  height: 720px !important;          /* era 820/840 */
+  transform: translateY(55px) !important; /* menos caída */
+}
+
+/* Que las cards se vean (estética) */
+.modules{
+  margin-top: -38px !important;      /* las sube */
+  padding-top: 18px !important;
+}
+
+/* Responsive (móvil) */
+@media (max-width: 980px){
+  .hero__inner{
+    min-height: auto !important;
+    padding: 62px 0 10px !important;
+  }
+  :root{ --hero-slogan-h: 155px; }
+  .hero__photo{
+    height: 520px !important;
+    transform: translateY(18px) !important;
+  }
+  .modules{
+    margin-top: -12px !important;
+  }
+}
+
+/* ===== Social icons PRO (SVG) ===== */
+.hero__social{
+  gap: 10px;
+  align-items: center;
+}
+
+.socialBtn{
+  width: 44px;
+  height: 44px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius: 999px;
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(255,255,255,.72);
+  box-shadow: 0 18px 34px rgba(0,0,0,.18);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+}
+
+.socialBtn svg{
+  width: 18px;
+  height: 18px;
+  fill: #1a1a1a;
+  opacity: .92;
+}
+
+.socialBtn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 24px 46px rgba(0,0,0,.22);
+  background: rgba(255,255,255,1);
+  border-color: rgba(255,255,255,.88);
+}
+
+.socialBtn:focus-visible{
+  outline: 3px solid rgba(255,255,255,.55);
+  outline-offset: 3px;
+}
+
+/* ===== Role line (debajo del slogan) ===== */
+.hero__role{
+  margin: 12px 0 0;
+  color: rgba(255,255,255,.92);
+  font-weight: 900;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-shadow: 0 14px 28px rgba(0,0,0,.25);
+}
+
+/* Una línea decorativa sutil (pro) */
+.hero__role::before{
+  content:"";
+  width: 34px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.70);
+  box-shadow: 0 10px 18px rgba(0,0,0,.18);
+}
+
+/* ===== Social icons PRO (BLANCOS) ===== */
+.hero__social{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.socialBtn{
+  width: 44px;
+  height: 44px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius: 999px;
+
+  /* blanco pro sobre rojo */
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.22);
+  backdrop-filter: blur(10px);
+
+  box-shadow: 0 18px 34px rgba(0,0,0,.22);
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+}
+
+.socialBtn svg{
+  width: 18px;
+  height: 18px;
+  fill: #ffffff;
+  opacity: .95;
+}
+
+.socialBtn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 26px 50px rgba(0,0,0,.30);
+  background: rgba(255,255,255,.18);
+  border-color: rgba(255,255,255,.32);
+}
+
+.socialBtn:focus-visible{
+  outline: 3px solid rgba(255,255,255,.45);
+  outline-offset: 3px;
+}
+
+/* =========================
+   HERO STACK (UNIFORME)
+========================= */
+.hero__content{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.hero__stack{
+  margin-top: 14px;
+  display:flex;
+  flex-direction:column;
+  gap: 14px;                 /* espaciado uniforme */
+  max-width: 520px;          /* evita que se disperse */
+}
+
+/* Role alineado y sin que quede “perdido” */
+.hero__role{
+  margin: 0 !important;
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  color: rgba(255,255,255,.92);
+  font-weight: 900;
+  letter-spacing: .6px;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.hero__role::before{
+  content:"";
+  width: 38px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.70);
+}
+
+/* CTA no debe empujar raro */
+.hero__actions{ margin:0 !important; }
+
+/* =========================
+   SOCIAL ICONS (VISIBLES)
+========================= */
+.hero__social{
+  display:flex;
+  gap: 10px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+/* Antes tenías blanco sobre blanco: cambiamos a "glass oscuro" */
+.socialBtn{
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  background: rgba(0,0,0,.18);       /* oscurece el chip */
+  border: 1px solid rgba(255,255,255,.20);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 16px 34px rgba(0,0,0,.22);
+
+  transition: transform .18s ease, background .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.socialBtn svg{
+  width: 18px;
+  height: 18px;
+  fill: #fff;
+  opacity: .98;                       /* full visible */
+}
+
+/* Hover pro */
+.socialBtn:hover{
+  transform: translateY(-2px);
+  background: rgba(0,0,0,.28);
+  border-color: rgba(255,255,255,.30);
+  box-shadow: 0 22px 48px rgba(0,0,0,.28);
+}
+
+.socialBtn:focus-visible{
+  outline: 3px solid rgba(255,255,255,.45);
+  outline-offset: 3px;
+}
+
+/* =========================
+   STATS: más pro y alineados
+========================= */
+.hero__stats{
+  margin-top: 2px !important;
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.stat{
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.16);
+  backdrop-filter: blur(10px);
+}
+
+.stat__num{
+  font-size: 20px;
+  font-weight: 950;
+  color: #fff;
+  line-height: 1.05;
+}
+
+.stat__label{
+  margin-top: 6px;
+  color: rgba(255,255,255,.85);
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+/* =========================
+   HERO: altura más estética
+========================= */
+.hero__inner{
+  min-height: 520px !important;
+  padding: 46px 0 26px !important;
+}
+
+/* Foto: grande pero sin inflar el hero */
+.hero__photo{
+  height: 720px !important;
+  transform: translateY(50px) !important;
+}
+
+/* Cards visibles */
+.modules{
+  margin-top: -36px !important;
+  padding-top: 18px !important;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .hero__stack{ max-width: 100%; }
+  .hero__stats{ grid-template-columns: 1fr; }
+  .hero__photo{ height: 520px !important; transform: translateY(16px) !important; }
+}
+
+.hero__stack{ display:flex; flex-direction:column; gap:14px; max-width:520px; margin-top:14px; }
+.hero__underSlogan{ display:flex; flex-direction:column; gap:12px; align-items:flex-start; }
+.hero__social{ display:flex; gap:10px; flex-wrap:wrap; }
+
+/* =========================
+   HERO: QUITAR ESPACIO ARRIBA + PEGAR AL PERSONAJE
+========================= */
+
+/* Baja la altura total del hero (menos rojo arriba) */
+.hero__inner{
+  min-height: 100px !important;   /* antes 520+ */
+  padding: 8px 0 2px !important;/* reduce top/bottom */
+  align-items: end !important;    /* todo cae hacia abajo */
+}
+
+/* Empuja el contenido un poco hacia abajo (para que no quede "flotando") */
+.hero__content{
+  padding-top: 18px !important;
+}
+
+/* Slogan un poquito más grande pero sin disparar el alto */
+.hero__sloganImg img{
+  max-width: 520px;
+  transform: translateY(6px);
+}
+
+/* Foto: que se “meta” y rellene el hero (más pegada y protagonista) */
+.hero__photoWrap{
+  align-self: end !important;
+}
+
+.hero__photo{
+  height: 760px !important;         /* más grande */
+  transform: translateY(70px) !important; /* baja el personaje para llenar */
+  filter: drop-shadow(0 32px 70px rgba(0,0,0,.35));
+}
+
+/* Que el stack (rol/cta/redes/stats) quede más cerca del slogan */
+.hero__stack{
+  margin-top: 10px !important;
+  gap: 12px !important;
+}
+
+/* =========================
+   ICONOS REDES: MÁS ESTÉTICA (NO BLANCOS “LAVADOS”)
+========================= */
+
+/* chips tipo "glass" oscuro para que el icono blanco se vea */
+.socialBtn{
+  width: 48px !important;
+  height: 48px !important;
+  background: rgba(0,0,0,.22) !important;      /* oscurece */
+  border: 1px solid rgba(255,255,255,.22) !important;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 18px 40px rgba(0,0,0,.28) !important;
+}
+
+.socialBtn svg{
+  width: 19px !important;
+  height: 19px !important;
+  fill: rgba(255,255,255,.98) !important;      /* blanco real */
+}
+
+/* hover más pro */
+.socialBtn:hover{
+  transform: translateY(-2px) scale(1.02);
+  background: rgba(0,0,0,.32) !important;
+  border-color: rgba(255,255,255,.34) !important;
+  box-shadow: 0 26px 55px rgba(0,0,0,.35) !important;
+}
+
+/* =========================
+   STATS: SUBIRLOS UN POCO (para que no queden tan abajo)
+========================= */
+.hero__stats{
+  margin-top: 4px !important;
+}
+
+/* =========================
+   CARDS: que se vean ya al final del hero
+========================= */
+.modules{
+  margin-top: -44px !important;  /* sube la sección de cards */
+  padding-top: 18px !important;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .hero__inner{ min-height: 560px !important; padding: 22px 0 14px !important; }
+  .hero__photo{ height: 560px !important; transform: translateY(18px) !important; }
+  .modules{ margin-top: -22px !important; }
+}
+
+/* =========================
+   MOBILE HERO (<= 720px) — PRO layout
+========================= */
+@media (max-width: 720px){
+
+  /* contenedor general */
+  .container{ padding-left:16px; padding-right:16px; }
+
+  /* header: más aire y alineación */
+  .topbar{ position: sticky; top:0; z-index:50; background:#fff; }
+  .topbar__inner{ height:72px; }
+
+  /* HERO: menos alto, sin espacio “muerto” */
+  .hero{ min-height:auto !important; }
+  .hero__inner{
+    min-height:auto !important;
+    padding: 18px 0 10px !important;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    align-items:stretch !important;
+  }
+
+  /* contenido centrado */
+  .hero__content{
+    width:100%;
+    max-width: 520px;
+    margin: 0 auto;
+    text-align:left;
+    padding-top: 0 !important;
+  }
+
+  /* slogan más grande y centrado visualmente */
+  .hero__sloganImg{
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+  .hero__sloganImg img{
+    width: min(520px, 92vw);
+    max-width: 92vw !important;
+    transform:none !important;
+  }
+
+  /* rol: compacto */
+  .hero__role{
+    margin: 6px 0 0;
+    font-size: 13px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    opacity: .95;
+  }
+
+  /* CTA + redes debajo del slogan, alineado y bonito */
+  .hero__underSlogan{
+    align-items:flex-start !important;
+    gap: 12px !important;
+  }
+  .btn--lg{
+    width: 100%;
+    justify-content:center;
+    padding: 14px 16px;
+    border-radius: 999px;
+  }
+
+  /* redes: tamaño ideal y con buen contraste */
+  .hero__social{
+    display:flex;
+    gap:10px;
+    flex-wrap:nowrap;
+  }
+  .socialBtn{
+    width:44px !important;
+    height:44px !important;
+    border-radius: 999px !important;
+    background: rgba(0,0,0,.26) !important;
+    border: 1px solid rgba(255,255,255,.22) !important;
+    backdrop-filter: blur(10px);
+  }
+  .socialBtn svg{
+    width:18px !important;
+    height:18px !important;
+    fill:#fff !important;
+    opacity: .98;
+  }
+
+  /* STATS: 3 mini-cards en grid (no barras gigantes) */
+  .hero__stats{
+    display:grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap:10px !important;
+    width:100%;
+    margin-top: 10px !important;
+  }
+  .stat{
+    padding: 12px 10px !important;
+    border-radius: 14px !important;
+    background: rgba(255,255,255,.10) !important;
+    border: 1px solid rgba(255,255,255,.18) !important;
+    backdrop-filter: blur(10px);
+    min-height: 74px;
+  }
+  .stat__num{
+    font-size: 18px !important;
+    line-height: 1;
+    font-weight: 800;
+  }
+  .stat__label{
+    margin-top: 6px;
+    font-size: 11px !important;
+    line-height: 1.2;
+    opacity: .95;
+  }
+
+  /* FOTO: en móvil la bajamos y recortamos elegante (si existe) */
+  .hero__photoWrap{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    margin-top: 6px;
+  }
+  .hero__photo{
+    height: 360px !important;
+    width: auto;
+    max-width: 92vw;
+    transform: translateY(10px) !important;
+    filter: drop-shadow(0 24px 50px rgba(0,0,0,.35));
+  }
+
+  /* Cards: que se vean apenas termina el hero */
+  .modules{
+    margin-top: -22px !important;
+    padding-top: 18px !important;
+  }
+  .modules__grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:12px;
+  }
+
+  /* WhatsApp: que no tape el contenido */
+  .wa-float, .whatsapp-float, .whatsapp-button{
+    right: 14px !important;
+    bottom: 14px !important;
+    transform: scale(.92);
+  }
+}
+
+/* Extra: para pantallas MUY pequeñas */
+@media (max-width: 420px){
+  .hero__stats{ grid-template-columns: 1fr !important; }
+  .stat{ min-height: auto; }
+}
+
+/* =========================
+   FIX: ÍCONOS SOCIALES HERO (se estaban “perdiendo”)
+========================= */
+.hero__social{
+  display:flex !important;
+  gap:12px !important;
+  align-items:center !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.hero__social .socialBtn{
+  width:44px !important;
+  height:44px !important;
+  display:grid !important;
+  place-items:center !important;
+  border-radius:999px !important;
+
+  /* look pro */
+  background: rgba(0,0,0,.22) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+.hero__social .socialBtn svg{
+  width:18px !important;
+  height:18px !important;
+  display:block !important;
+  fill:#fff !important;          /* clave */
+  opacity: .98 !important;
+}
+
+/* Hover pro */
+.hero__social .socialBtn:hover{
+  transform: translateY(-1px) !important;
+  background: rgba(255,255,255,.12) !important;
+  border-color: rgba(255,255,255,.30) !important;
+}
+
+/* =========================
+   QUIÉN SOY – DISEÑO PRO
+========================= */
+
+.pageHero{
+  position:relative;
+  overflow:hidden;
+  padding: 44px 0 30px;
+}
+.pageHero__bg{
+  position:absolute; inset:0;
+  background-size:cover;
+  background-position:center;
+  transform: scale(1.02);
+}
+.pageHero__overlay{
+  position:absolute; inset:0;
+  background: radial-gradient(1200px 500px at 25% 45%, rgba(0,0,0,.35), transparent 60%),
+              linear-gradient(90deg, rgba(120,0,0,.70), rgba(190,0,0,.55));
+}
+.pageHero__inner{ position:relative; z-index:2; max-width: 980px; }
+.pageHero__kicker{
+  color: rgba(255,255,255,.85);
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  font-size:12px;
+  margin-bottom: 10px;
+}
+.pageHero__title{
+  color:#fff;
+  font-size: clamp(30px, 4.2vw, 44px);
+  line-height:1.05;
+  margin: 0 0 10px;
+  font-weight: 900;
+}
+.pageHero__lead{
+  color: rgba(255,255,255,.88);
+  max-width: 62ch;
+  margin: 0 0 14px;
+}
+.pageHero__meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top: 14px; }
+.pill{
+  display:inline-flex;
+  align-items:center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: rgba(255,255,255,.92);
+  background: rgba(0,0,0,.22);
+  border: 1px solid rgba(255,255,255,.16);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-size: 12px;
+}
+.pageHero__cta{ margin-top: 18px; }
+
+.about{ padding: 28px 0 70px; }
+.about__grid{
+  display:grid;
+  grid-template-columns: 1.25fr .75fr;
+  gap: 18px;
+  align-items:start;
+}
+
+.card{
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,.06);
+  background:#fff;
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+  overflow:hidden;
+}
+.card--soft{
+  background: linear-gradient(180deg,#fff, #fbfbfb);
+}
+.card--glass{
+  background: rgba(255,255,255,.70);
+  border: 1px solid rgba(255,255,255,.45);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.card__head{
+  padding: 18px 18px 10px;
+}
+.card__title{
+  margin:0;
+  font-size: 18px;
+  font-weight: 900;
+}
+.card__sub{
+  margin: 6px 0 0;
+  color: #666;
+  font-size: 13px;
+}
+.card__body{ padding: 0 18px 18px; }
+
+.prose p{ color:#333; line-height:1.65; }
+.prose hr{
+  border:0; height:1px;
+  background: rgba(0,0,0,.08);
+  margin: 18px 0;
+}
+.prose h3{
+  margin: 0 0 10px;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color:#222;
+}
+.prose ul{ margin: 0; padding-left: 18px; }
+.prose li{ margin: 8px 0; }
+.note{
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(184,15,26,.08);
+  border: 1px solid rgba(184,15,26,.16);
+}
+
+.asideStack{
+  display:flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 88px;
+}
+
+.statsGrid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 12px;
+  padding: 0 18px 18px;
+}
+.statMini{
+  border-radius: 14px;
+  padding: 14px;
+  background: rgba(0,0,0,.05);
+  border: 1px solid rgba(0,0,0,.06);
+}
+.statMini__num{
+  font-size: 26px;
+  font-weight: 900;
+  color: #b80f1a;
+  line-height:1;
+}
+.statMini__label{
+  margin-top: 6px;
+  font-size: 12px;
+  color:#555;
+}
+
+.checks{
+  list-style:none;
+  padding: 0 18px 18px;
+  margin: 0;
+  display:grid;
+  gap: 10px;
+}
+.checks li{
+  position:relative;
+  padding-left: 26px;
+  color:#333;
+}
+.checks li:before{
+  content:"";
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  position:absolute;
+  left:0; top: 3px;
+  background: rgba(184,15,26,.14);
+  border: 1px solid rgba(184,15,26,.30);
+  box-shadow: inset 0 0 0 3px rgba(184,15,26,.08);
+}
+
+.party{
+  display:flex;
+  gap: 12px;
+  align-items:center;
+  padding: 14px 18px 18px;
+  border-top: 1px solid rgba(0,0,0,.08);
+  background: linear-gradient(180deg, rgba(255,255,255,.0), rgba(0,0,0,.02));
+}
+.party__logo{
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 10px 22px rgba(0,0,0,.08);
+}
+.party__kicker{
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color:#777;
+}
+.party__name{
+  font-weight: 900;
+  color:#111;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .about__grid{ grid-template-columns: 1fr; }
+  .asideStack{ position: static; }
+}
+
+/* =========================
+   QUIÉN SOY – HERO PRO
+========================= */
+
+.pageHero--about{
+  position: relative;
+  overflow: hidden;
+  padding: 28px 0 26px;        /* más bajito */
+  min-height: 300px;           /* evita hero gigante */
+}
+
+.pageHero--about .pageHero__bg{
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.03);
+  filter: saturate(1.05);
+}
+
+.pageHero--about .pageHero__overlay{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(900px 420px at 22% 52%, rgba(0,0,0,.42), transparent 60%),
+    linear-gradient(90deg, rgba(120,0,0,.72), rgba(200,0,0,.55));
+}
+
+.pageHero--about .pageHero__inner{
+  position: relative;
+  z-index: 2;
+}
+
+/* Bloque editorial */
+.aboutHero{
+  display: grid;
+  align-items: center;
+}
+
+.aboutHero__panel{
+  max-width: 760px;                /* evita que se riegue */
+  padding: 22px 22px;
+  border-radius: 18px;
+  background: rgba(0,0,0,.20);
+  border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 18px 45px rgba(0,0,0,.22);
+}
+
+.aboutHero__kicker{
+  display:inline-flex;
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.88);
+  margin-bottom: 10px;
+}
+
+.aboutHero__title{
+  margin: 0 0 10px;
+  color: #fff;
+  font-weight: 900;
+  line-height: 1.04;
+  font-size: clamp(30px, 3.6vw, 46px);
+}
+
+.aboutHero__lead{
+  margin: 0 0 14px;
+  color: rgba(255,255,255,.90);
+  line-height: 1.55;
+  max-width: 62ch;
+}
+
+.aboutHero__row{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;   /* pills izquierda, CTA derecha */
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.aboutHero__pills{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;                  /* se acomoda bonito */
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: rgba(255,255,255,.92);
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.18);
+}
+
+.aboutHero__cta{
+  white-space: nowrap;
+}
+
+/* Responsive */
+@media (max-width: 700px){
+  .pageHero--about{ min-height: auto; padding: 18px 0 18px; }
+  .aboutHero__panel{ padding: 16px; border-radius: 16px; }
+  .aboutHero__row{ justify-content: flex-start; }
+}
+
+/* =========================
+   HERO PRO – GESTIÓN (MISMO ESTILO)
+========================= */
+.pageHero--gestion{
+  position: relative;
+  overflow: hidden;
+  padding: 28px 0 26px;
+  min-height: 300px;
+}
+
+.pageHero--gestion .pageHero__bg{
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.03);
+  filter: saturate(1.05);
+}
+
+.pageHero--gestion .pageHero__overlay{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(900px 420px at 22% 52%, rgba(0,0,0,.42), transparent 60%),
+    linear-gradient(90deg, rgba(120,0,0,.72), rgba(200,0,0,.55));
+}
+
+.pageHero--gestion .pageHero__inner{ position: relative; z-index: 2; }
+
+.gestionHero{ display: grid; align-items: center; }
+
+.gestionHero__panel{
+  max-width: 820px;
+  padding: 22px 22px;
+  border-radius: 18px;
+  background: rgba(0,0,0,.20);
+  border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 18px 45px rgba(0,0,0,.22);
+}
+
+.gestionHero__kicker{
+  display:inline-flex;
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.88);
+  margin-bottom: 10px;
+}
+
+.gestionHero__title{
+  margin: 0 0 10px;
+  color: #fff;
+  font-weight: 900;
+  line-height: 1.04;
+  font-size: clamp(30px, 3.4vw, 46px);
+}
+
+.gestionHero__lead{
+  margin: 0 0 14px;
+  color: rgba(255,255,255,.90);
+  line-height: 1.55;
+  max-width: 68ch;
+}
+
+.gestionHero__row{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.gestionHero__pills{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.gestionHero__cta{ white-space: nowrap; }
+
+@media (max-width: 700px){
+  .pageHero--gestion{ min-height: auto; padding: 18px 0 18px; }
+  .gestionHero__panel{ padding: 16px; border-radius: 16px; }
+  .gestionHero__row{ justify-content: flex-start; }
+}
+
+/* =========================
+   HERO PRO – NOTICIAS
+========================= */
+.pageHero--news{
+  position: relative;
+  overflow: hidden;
+  padding: 28px 0 26px;
+  min-height: 300px;
+}
+
+.pageHero--news .pageHero__bg{
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.03);
+  filter: saturate(1.05);
+}
+
+.pageHero--news .pageHero__overlay{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(900px 420px at 22% 52%, rgba(0,0,0,.42), transparent 60%),
+    linear-gradient(90deg, rgba(120,0,0,.72), rgba(200,0,0,.55));
+}
+
+.pageHero--news .pageHero__inner{ position: relative; z-index: 2; }
+
+.newsHero__panel{
+  max-width: 860px;
+  padding: 22px;
+  border-radius: 18px;
+  background: rgba(0,0,0,.20);
+  border: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 18px 45px rgba(0,0,0,.22);
+}
+
+.newsHero__kicker{
+  display:inline-flex;
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.88);
+  margin-bottom: 10px;
+}
+
+.newsHero__title{
+  margin: 0 0 10px;
+  color: #fff;
+  font-weight: 900;
+  line-height: 1.04;
+  font-size: clamp(30px, 3.4vw, 46px);
+}
+
+.newsHero__lead{
+  margin: 0 0 14px;
+  color: rgba(255,255,255,.90);
+  line-height: 1.55;
+  max-width: 70ch;
+}
+
+.newsHero__row{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.newsHero__pills{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.newsHero__cta{ white-space: nowrap; }
+
+/* =========================
+   POSTS PRO
+========================= */
+.posts--pro{ display:grid; gap: 12px; margin-top: 12px; }
+
+.post--pro{
+  display:block;
+  padding: 14px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.06);
+  background: #fff;
+  box-shadow: 0 10px 22px rgba(0,0,0,.06);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.post--pro:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(0,0,0,.10);
+  border-color: rgba(184, 15, 26, .22);
+}
+
+.post__top{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.post__tag{
+  display:inline-flex;
+  align-items:center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #b80f1a;
+  background: rgba(184, 15, 26, .10);
+  border: 1px solid rgba(184, 15, 26, .14);
+}
+
+.post__meta{ opacity: .75; font-size: 12px; }
+
+/* =========================
+   INSTAGRAM PRO
+========================= */
+.igGrid--pro{
+  margin-top: 12px;
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.igItem--pro{
+  position: relative;
+  display:block;
+  border-radius: 14px;
+  overflow:hidden;
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 10px 22px rgba(0,0,0,.06);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.igItem--pro:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(0,0,0,.10);
+}
+
+.igItem__thumb{
+  aspect-ratio: 1 / 1;
+  background-size: cover;
+  background-position: center;
+}
+
+.igItem__overlay{
+  position:absolute; inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(0,0,0,.35);
+  color: #fff;
+  font-weight: 800;
+  opacity: 0;
+  transition: opacity .18s ease;
+}
+
+.igItem--pro:hover .igItem__overlay{ opacity: 1; }
+
+@media (max-width: 900px){
+  .igGrid--pro{ grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 560px){
+  .pageHero--news{ padding: 18px 0; min-height: auto; }
+  .newsHero__panel{ padding: 16px; border-radius: 16px; }
+  .igGrid--pro{ grid-template-columns: repeat(2, 1fr); }
+}
+
+/* =========================
+   NOTICIA DETALLE
+========================= */
+.newsDetail__top{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.newsDetail__meta{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.newsDetail__cover{
+  margin: 14px 0 10px;
+  width: 100%;
+  height: 220px;
+  border-radius: 16px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 16px 34px rgba(0,0,0,.10);
+}
+
+.newsDetail__body p{
+  margin: 10px 0;
+  line-height: 1.7;
+}
+
+/* =========================
+   NOTICIAS PRO
+========================= */
+.pageHero--news .pageHero__overlay{
+  background: radial-gradient(1200px 520px at 20% 30%, rgba(0,0,0,.12), rgba(0,0,0,.55)),
+              linear-gradient(180deg, rgba(184,15,26,.82), rgba(184,15,26,.92));
+}
+
+.newsToolbar{
+  display:grid;
+  grid-template-columns: 1fr 280px auto;
+  gap: 12px;
+  align-items:center;
+  margin-top: 16px;
+}
+
+.newsSearch__input{
+  width:100%;
+  padding: 12px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(255,255,255,.10);
+  color: #fff;
+  outline: none;
+  backdrop-filter: blur(10px);
+}
+.newsSearch__input::placeholder{ color: rgba(255,255,255,.7); }
+
+.newsFilters{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 8px;
+}
+
+.chip--btn{
+  cursor:pointer;
+  user-select:none;
+  border: 1px solid rgba(255,255,255,.20);
+  background: rgba(255,255,255,.10);
+  color: #fff;
+  transition: transform .15s ease, background .2s ease, border-color .2s ease;
+}
+.chip--btn:hover{ transform: translateY(-1px); }
+.chip--btn.is-active{
+  background: rgba(255,255,255,.22);
+  border-color: rgba(255,255,255,.36);
+}
+
+.posts--pro{
+  display:flex;
+  flex-direction:column;
+  gap: 12px;
+}
+
+.post--pro{
+  display:grid;
+  grid-template-columns: 120px 1fr;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,.06);
+  background: #fff;
+  box-shadow: 0 10px 26px rgba(0,0,0,.08);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.post--pro:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(0,0,0,.12);
+}
+
+.post__thumb{
+  width: 120px;
+  height: 90px;
+  border-radius: 14px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+.post__top{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.post__tag{
+  display:inline-flex;
+  align-items:center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 12px;
+  background: rgba(184,15,26,.10);
+  color: #b80f1a;
+}
+
+.newsFeatured{
+  display:grid;
+  grid-template-columns: 220px 1fr;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(184,15,26,.06), rgba(184,15,26,.02));
+  border: 1px solid rgba(184,15,26,.12);
+  box-shadow: 0 18px 46px rgba(0,0,0,.10);
+  margin-bottom: 14px;
+}
+
+.newsFeatured__media{
+  height: 160px;
+  border-radius: 18px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+.newsFeatured__title{ font-size: 20px; font-weight: 900; margin-top: 6px; }
+.newsFeatured__text{ margin-top: 6px; color: rgba(0,0,0,.66); line-height: 1.6; }
+.newsFeatured__actions{ display:flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+
+.newsDetail__top{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.newsDetail__meta{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.newsDetail__cover{
+  margin: 14px 0 10px;
+  width: 100%;
+  height: 260px;
+  border-radius: 18px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 16px 34px rgba(0,0,0,.12);
+}
+
+.newsDetail__body p{ margin: 10px 0; line-height: 1.7; }
+
+.newsDetail__tags{
+  display:flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 10px 0 4px;
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 12px;
+  background: rgba(255,255,255,.16);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.18);
+}
+.pill--soft{
+  background: rgba(184,15,26,.10);
+  color: #b80f1a;
+  border: 1px solid rgba(184,15,26,.18);
+}
+
+.newsDetail__actions{
+  display:flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+/* Galería */
+.newsGallery{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+.newsGallery__item{
+  height: 120px;
+  border-radius: 16px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 10px 26px rgba(0,0,0,.10);
+  transition: transform .18s ease;
+}
+.newsGallery__item:hover{ transform: translateY(-2px); }
+
+/* Instagram pro */
+.igGrid--pro{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.igItem--pro{
+  position:relative;
+  border-radius: 16px;
+  overflow:hidden;
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 10px 24px rgba(0,0,0,.10);
+}
+.igItem__thumb{ padding-top: 100%; background-size: cover; background-position: center; }
+.igItem__overlay{
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  background: rgba(0,0,0,.0);
+  color:#fff;
+  font-weight: 900;
+  transition: background .18s ease;
+}
+.igItem--pro:hover .igItem__overlay{ background: rgba(0,0,0,.22); }
+
+/* Responsive */
+@media (max-width: 980px){
+  .newsToolbar{ grid-template-columns: 1fr; }
+  .newsFeatured{ grid-template-columns: 1fr; }
+  .newsFeatured__media{ height: 200px; }
+  .post--pro{ grid-template-columns: 1fr; }
+  .post__thumb{ width: 100%; height: 180px; }
+  .newsGallery{ grid-template-columns: repeat(2, 1fr); }
+  .igGrid--pro{ grid-template-columns: repeat(2, 1fr); }
+}

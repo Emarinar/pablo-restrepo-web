@@ -1,0 +1,48 @@
+[
+  {
+    "slug": "territorio-seguimiento-solicitudes",
+    "titulo": "Seguimos trabajando en territorio",
+    "resumen": "Visitas, escucha y seguimiento a solicitudes ciudadanas.",
+    "categoria": "Gestión",
+    "lugar": "Envigado",
+    "fecha": "2026-02-25",
+    "imagen": "assets/img/noticias/territorio.jpg",
+    "contenido": [
+      "Hoy continuamos en territorio escuchando a la comunidad y registrando necesidades reales.",
+      "Nuestro enfoque es seguimiento y resultados: cada solicitud tiene ruta, responsable y fecha de verificación.",
+      "Si quieres proponer una iniciativa, escríbeme y la revisamos juntos."
+    ],
+    "cta_texto": "Quiero proponer algo",
+    "cta_url": "contacto"
+  },
+  {
+    "slug": "reunion-lideres-barriales",
+    "titulo": "Gestión con líderes barriales",
+    "resumen": "Agenda de trabajo y compromisos verificables con la comunidad.",
+    "categoria": "Comunidad",
+    "lugar": "Envigado",
+    "fecha": "2026-02-20",
+    "imagen": "assets/img/noticias/lideres.jpg",
+    "contenido": [
+      "Nos reunimos con líderes barriales para priorizar necesidades y definir acciones con seguimiento.",
+      "La participación ciudadana es clave para construir soluciones sostenibles."
+    ],
+    "cta_texto": "Reportar necesidad",
+    "cta_url": "contacto"
+  },
+  {
+    "slug": "educacion-motor-transformacion",
+    "titulo": "Educación como motor de transformación",
+    "resumen": "Articulación para abrir oportunidades y fortalecer procesos formativos.",
+    "categoria": "Educación",
+    "lugar": "Envigado",
+    "fecha": "2026-02-10",
+    "imagen": "assets/img/noticias/educacion.jpg",
+    "contenido": [
+      "Seguimos impulsando iniciativas educativas que abren puertas y fortalecen el futuro.",
+      "La educación, la gratitud y el trabajo cercano con la comunidad son parte del camino."
+    ],
+    "cta_texto": "Invítame a tu evento",
+    "cta_url": "contacto"
+  }
+]
